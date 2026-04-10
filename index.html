@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ALTARA — Bolsos de lujo artesanal hechos en Colombia. Luxury, Recrafted in Colombia." />
+  <title>ALTARA — Luxury, Recrafted in Colombia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       ALTARA — SISTEMA DE DISEÑO COMPLETO
+       ============================================================ */
+    :root {
+      --color-negro:    #0A0A0A;
+      --color-marfil:   #F5F2ED;
+      --color-dorado:   #C6A96B;
+      --color-dorado-l: #D4BC8A;
+      --color-verde:    #1C2B26;
+      --color-gris:     #8A8680;
+      --color-borde:    rgba(198,169,107,0.2);
+      --font-serif:  'Playfair Display', Georgia, serif;
+      --font-italic: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:   'Jost', 'Helvetica Neue', sans-serif;
+      --transition-slow:   0.8s cubic-bezier(0.16,1,0.3,1);
+      --transition-medium: 0.5s cubic-bezier(0.16,1,0.3,1);
+      --section-pad: clamp(80px,10vw,140px);
+      --container:   1200px;
+      --container-n: 760px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--color-marfil);
+      color: var(--color-negro);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.7;
+      cursor: none;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ── CURSOR ── */
+    .cursor, .cursor-follower {
+      position: fixed; top: 0; left: 0; pointer-events: none;
+      z-index: 9999; border-radius: 50%; transform: translate(-50%,-50%);
+    }
+    .cursor { width: 6px; height: 6px; background: var(--color-dorado); transition: transform 0.1s, background 0.3s, border 0.3s; }
+    .cursor-follower { width: 36px; height: 36px; border: 1px solid rgba(198,169,107,0.5); transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), width .35s, height .35s, border-color .35s; }
+    @media (hover:none) { .cursor, .cursor-follower { display: none; } body { cursor: auto; } }
+
+    /* ── CONTAINERS ── */
+    .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 clamp(20px,5vw,60px); }
+    .container--narrow { max-width: var(--container-n); }
+
+    /* ── TYPOGRAPHY ── */
+    .section-label { display: block; font-family: var(--font-sans); font-weight: 200; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-dorado); margin-bottom: 1.5rem; }
+    .section-label--light { color: var(--color-dorado-l); }
+    .section-title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.2rem,4vw,3.4rem); line-height: 1.15; letter-spacing: -0.02em; color: var(--color-negro); margin-bottom: 1.5rem; }
+    .section-title em { font-family: var(--font-italic); font-style: italic; font-weight: 300; }
+    .section-title--light { color: var(--color-marfil); }
+    .section-sub { font-family: var(--font-sans); font-weight: 200; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--color-gris); text-transform: uppercase; }
+    .section-header { text-align: center; margin-bottom: clamp(50px,7vw,90px); }
+    .label { font-family: var(--font-sans); font-weight: 200; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-dorado); }
+    .label-divider { margin: 0 0.8em; color: var(--color-dorado); opacity: 0.4; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-sans); font-weight: 300; font-size: 0.75rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 1rem 2.4rem; border: 1px solid transparent;
+      cursor: none; position: relative; overflow: hidden;
+      transition: background var(--transition-medium), color var(--transition-medium), border-color var(--transition-medium), transform 0.25s ease;
+    }
+    .btn::after { content:''; position:absolute; inset:0; background:rgba(255,255,255,0.07); transform:translateX(-101%); transition:transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .btn:hover::after { transform:translateX(0); }
+    .btn--primary { background: var(--color-negro); color: var(--color-marfil); border-color: var(--color-negro); }
+    .btn--primary:hover { background: var(--color-verde); border-color: var(--color-verde); transform: translateY(-1px); }
+    .btn--ghost { background: transparent; color: var(--color-marfil); border-color: rgba(245,242,237,0.5); }
+    .btn--ghost:hover { border-color: var(--color-marfil); }
+    .btn--outline { background: transparent; color: var(--color-negro); border-color: var(--color-negro); }
+    .btn--outline:hover { background: var(--color-negro); color: var(--color-marfil); }
+    .btn--full { width: 100%; }
+    .btn--gold { background: var(--color-dorado); color: var(--color-negro); border-color: var(--color-dorado); }
+    .btn--gold:hover { background: var(--color-dorado-l); }
+
+    /* ── SECTION ── */
+    .section { padding: var(--section-pad) 0; position: relative; }
+
+    /* ── REVEAL ── */
+    .reveal-up, .reveal-left, .reveal-right { opacity: 0; transition: opacity var(--transition-slow), transform var(--transition-slow); transition-delay: var(--delay, 0s); }
+    .reveal-up    { transform: translateY(40px); }
+    .reveal-left  { transform: translateX(-40px); }
+    .reveal-right { transform: translateX(40px); }
+    .revealed     { opacity: 1; transform: translate(0); }
+
+    /* ── IMAGEN EDITORIAL ── */
+    .e-img {
+      width:100%; height:100%;
+      background-size:cover; background-position:center;
+      filter: sepia(12%) contrast(1.06) brightness(0.98);
+      transition: transform 1.2s cubic-bezier(0.16,1,0.3,1), filter 0.8s;
+    }
+
+    /* ============================================================
+       CARRITO — DRAWER LATERAL
+       ============================================================ */
+    .cart-overlay {
+      position: fixed; inset: 0; background: rgba(10,10,10,0.55);
+      z-index: 500; opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+      backdrop-filter: blur(4px);
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: min(440px, 100vw);
+      background: var(--color-marfil);
+      z-index: 600;
+      transform: translateX(100%);
+      transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+      display: flex; flex-direction: column;
+      border-left: 1px solid var(--color-borde);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--color-borde);
+    }
+    .cart-title { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400; }
+    .cart-count { font-family: var(--font-sans); font-size: 0.68rem; font-weight: 200; letter-spacing: 0.15em; color: var(--color-dorado); margin-left: 0.8rem; }
+    .cart-close {
+      background: none; border: none; cursor: none;
+      font-size: 1.4rem; color: var(--color-negro);
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      transition: color var(--transition-medium);
+    }
+    .cart-close:hover { color: var(--color-dorado); }
+
+    .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; }
+    .cart-items::-webkit-scrollbar { width: 3px; }
+    .cart-items::-webkit-scrollbar-track { background: transparent; }
+    .cart-items::-webkit-scrollbar-thumb { background: var(--color-borde); }
+
+    .cart-empty { text-align: center; padding: 4rem 1rem; }
+    .cart-empty-icon { font-size: 2.5rem; opacity: 0.2; margin-bottom: 1rem; }
+    .cart-empty p { font-family: var(--font-sans); font-weight: 200; font-size: 0.82rem; color: var(--color-gris); letter-spacing: 0.1em; }
+
+    .cart-item {
+      display: grid; grid-template-columns: 80px 1fr auto;
+      gap: 1.2rem; padding: 1.2rem 0;
+      border-bottom: 1px solid var(--color-borde);
+      animation: slideIn 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    @keyframes slideIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
+    .cart-item-img { width:80px; height:90px; overflow:hidden; flex-shrink:0; }
+    .cart-item-img .e-img { }
+    .cart-item-info { display: flex; flex-direction: column; justify-content: center; }
+    .cart-item-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 400; margin-bottom: 0.3rem; }
+    .cart-item-ed { font-family: var(--font-sans); font-size: 0.62rem; font-weight: 200; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-dorado); margin-bottom: 0.5rem; }
+    .cart-item-price { font-family: var(--font-sans); font-size: 0.82rem; font-weight: 300; color: var(--color-negro); }
+    .cart-item-remove {
+      background: none; border: none; cursor: none;
+      color: var(--color-gris); font-size: 1rem; align-self: start;
+      padding: 0.2rem; transition: color 0.25s;
+    }
+    .cart-item-remove:hover { color: #b54040; }
+
+    .cart-footer { padding: 1.5rem 2rem 2rem; border-top: 1px solid var(--color-borde); }
+    .cart-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .cart-subtotal-label { font-family: var(--font-sans); font-size: 0.72rem; font-weight: 200; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-gris); }
+    .cart-subtotal-value { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400; }
+
+    /* Métodos de pago en el carrito */
+    .cart-payment-methods { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .pm-badge {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: white; border: 1px solid rgba(10,10,10,0.1);
+      padding: 0.4rem 0.75rem; border-radius: 4px;
+      font-family: var(--font-sans); font-size: 0.62rem; font-weight: 300;
+      letter-spacing: 0.08em; color: var(--color-negro);
+    }
+    .pm-badge svg { flex-shrink: 0; }
+
+    .cart-checkout-note { font-family: var(--font-sans); font-size: 0.65rem; font-weight: 200; color: var(--color-gris); text-align: center; margin-top: 1rem; letter-spacing: 0.08em; line-height: 1.6; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.6rem clamp(20px,5vw,60px);
+      transition: background var(--transition-medium), padding var(--transition-medium);
+    }
+    .nav.scrolled {
+      background: rgba(245,242,237,0.94); backdrop-filter: blur(12px);
+      padding-top: 1rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-borde);
+    }
+    .nav__logo { display: flex; flex-direction: column; line-height: 1; }
+    .nav__logo-text { font-family: var(--font-serif); font-weight: 500; font-size: 1.25rem; letter-spacing: 0.18em; color: var(--color-negro); }
+    .nav__logo-sub { font-family: var(--font-sans); font-weight: 200; font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-dorado); margin-top: 1px; }
+    .nav__links { display: flex; align-items: center; gap: 2rem; }
+    .nav__link { font-family: var(--font-sans); font-weight: 300; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-negro); position: relative; }
+    .nav__link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--color-dorado); transition:width var(--transition-medium); }
+    .nav__link:hover::after { width:100%; }
+
+    /* Botón carrito NAV */
+    .nav__cart-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: none; border: 1px solid var(--color-borde);
+      padding: 0.55rem 1.1rem; cursor: none;
+      font-family: var(--font-sans); font-weight: 300; font-size: 0.7rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-negro);
+      transition: border-color var(--transition-medium), background var(--transition-medium);
+      position: relative;
+    }
+    .nav__cart-btn:hover { border-color: var(--color-dorado); background: rgba(198,169,107,0.06); }
+    .nav__cart-badge {
+      position: absolute; top: -7px; right: -7px;
+      background: var(--color-dorado); color: var(--color-negro);
+      font-size: 0.55rem; font-weight: 400; letter-spacing: 0;
+      width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: scale(0);
+      transition: opacity 0.3s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav__cart-badge.visible { opacity: 1; transform: scale(1); }
+
+    /* ── HERO ── */
+    .hero { min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+    .hero__bg { position: absolute; inset: 0; z-index: 0; }
+    .hero__texture { position: absolute; inset: 0; background: var(--color-marfil); }
+    .hero__grain { position:absolute; inset:0; opacity:.6; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); background-size:200px; }
+    .hero__content { position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center; padding:8rem clamp(24px,6vw,80px) 6rem; }
+    .hero__edition { margin-bottom: 2.5rem; }
+    .hero__headline { font-family:var(--font-serif); font-weight:400; font-size:clamp(3rem,5.5vw,5.5rem); line-height:1.08; letter-spacing:-0.02em; color:var(--color-negro); margin-bottom:2rem; }
+    .hero__headline em { font-family:var(--font-italic); font-style:italic; font-weight:300; color:var(--color-dorado); }
+    .hero__sub { font-family:var(--font-sans); font-weight:200; font-size:0.9rem; line-height:1.9; letter-spacing:0.06em; color:var(--color-gris); margin-bottom:3rem; }
+    .hero__cta-wrap { display:flex; gap:1rem; flex-wrap:wrap; }
+    .hero__image-wrap { position:relative; z-index:1; overflow:hidden; }
+    .hero__image { position:absolute; inset:0; }
+    .hero__scroll-indicator { position:absolute; bottom:2.5rem; left:clamp(24px,6vw,80px); z-index:3; display:flex; flex-direction:column; align-items:center; gap:.75rem; animation:fadeInScroll 1.5s 1.5s forwards; opacity:0; }
+    @keyframes fadeInScroll { to{opacity:.5} }
+    .hero__scroll-line { width:1px; height:50px; background:linear-gradient(to bottom,var(--color-dorado),transparent); animation:scrollPulse 2.5s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100%{transform:scaleY(1);opacity:.5} 50%{transform:scaleY(.7);opacity:1} }
+    .hero__scroll-label { font-family:var(--font-sans); font-weight:200; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--color-gris); writing-mode:vertical-rl; }
+
+    /* ── MANIFIESTO ── */
+    .manifiesto { background:var(--color-negro); color:var(--color-marfil); position:relative; overflow:hidden; }
+    .manifiesto::before { content:''; position:absolute; top:-1px; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--color-dorado),transparent); }
+    .manifiesto::after  { content:''; position:absolute; bottom:-1px; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--color-dorado),transparent); }
+    .manifiesto__num { font-family:var(--font-serif); font-size:clamp(5rem,12vw,10rem); font-weight:400; color:rgba(198,169,107,0.08); line-height:1; position:absolute; top:var(--section-pad); right:clamp(20px,5vw,60px); pointer-events:none; user-select:none; }
+    .manifiesto__quote { border:none; padding:0; margin-bottom:2.5rem; }
+    .manifiesto__quote p { font-family:var(--font-serif); font-weight:400; font-size:clamp(1.6rem,3.5vw,2.8rem); line-height:1.35; color:var(--color-marfil); }
+    .manifiesto__quote em { font-family:var(--font-italic); font-style:italic; color:var(--color-dorado); }
+    .manifiesto__body { display:flex; flex-direction:column; gap:1.2rem; color:rgba(245,242,237,.65); font-weight:200; font-size:.9rem; line-height:1.85; margin-bottom:2.5rem; }
+    .manifiesto__mark { font-family:var(--font-sans); font-weight:200; font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-dorado); padding-top:2rem; border-top:1px solid rgba(198,169,107,0.2); }
+
+    /* ── HISTORIA ── */
+    .historia { background: var(--color-marfil); overflow: hidden; }
+    .historia__layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
+    .historia__images { position: relative; overflow: hidden; }
+    .historia__img-main { position: absolute; inset: 0; }
+    .historia__img-main .e-img { filter: sepia(20%) contrast(1.08) brightness(0.9); }
+    .historia__img-overlay {
+      position: absolute; bottom: 2.5rem; right: -1px;
+      width: 55%; aspect-ratio: 4/3; overflow: hidden;
+      border: 3px solid var(--color-marfil);
+      box-shadow: -8px 8px 40px rgba(10,10,10,0.25);
+    }
+    .historia__content {
+      padding: clamp(50px,8vw,100px) clamp(40px,6vw,80px);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .historia__year {
+      font-family: var(--font-serif); font-weight: 400;
+      font-size: clamp(4rem,8vw,7rem); line-height: 1;
+      color: rgba(10,10,10,0.06); position: absolute;
+      top: clamp(40px,6vw,70px); right: 0; pointer-events: none;
+      letter-spacing: -0.05em;
+    }
+    .historia__milestones { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0; }
+    .milestone {
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 1.2rem; padding: 1.5rem 0;
+      border-bottom: 1px solid var(--color-borde);
+      position: relative;
+    }
+    .milestone:first-child { border-top: 1px solid var(--color-borde); }
+    .milestone__year { font-family: var(--font-serif); font-style: italic; font-size: 0.82rem; color: var(--color-dorado); padding-top: 0.15rem; }
+    .milestone__text { font-size: 0.84rem; font-weight: 300; color: rgba(10,10,10,0.75); line-height: 1.7; }
+    .milestone__text strong { font-weight: 400; color: var(--color-negro); display: block; margin-bottom: 0.2rem; }
+    .historia__text { font-size: 0.9rem; font-weight: 300; color: rgba(10,10,10,0.75); line-height: 1.85; margin-bottom: 1.2rem; }
+
+    /* ── COLECCIÓN ── */
+    .coleccion { background: var(--color-marfil); }
+    .coleccion__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .pieza { display: flex; flex-direction: column; background: var(--color-marfil); }
+    .pieza__image-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; }
+    .pieza--featured .pieza__image-wrap { aspect-ratio: 3/4.5; }
+    .pieza:hover .e-img { transform: scale(1.04); }
+    .pieza__overlay { position:absolute; inset:0; background:rgba(10,10,10,.45); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.8rem; opacity:0; transition:opacity var(--transition-medium); }
+    .pieza:hover .pieza__overlay { opacity: 1; }
+    .pieza__edition-tag { position:absolute; top:1.2rem; left:1.2rem; font-family:var(--font-sans); font-weight:200; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-marfil); background:rgba(10,10,10,.6); padding:.35rem .75rem; backdrop-filter:blur(4px); }
+    .pieza__info { padding:1.8rem 1.5rem 2rem; border:1px solid var(--color-borde); border-top:none; flex:1; display:flex; flex-direction:column; transition:border-color .5s ease; }
+    .pieza:hover .pieza__info { border-color: rgba(198,169,107,0.45); }
+    .pieza__num { font-family:var(--font-sans); font-weight:200; font-size:.65rem; letter-spacing:.2em; color:var(--color-dorado); display:block; margin-bottom:.75rem; }
+    .pieza__name { font-family:var(--font-serif); font-weight:400; font-size:1.4rem; letter-spacing:-0.01em; color:var(--color-negro); margin-bottom:.9rem; }
+    .pieza__story { font-size:.82rem; font-weight:300; color:var(--color-gris); line-height:1.75; flex:1; margin-bottom:1.2rem; }
+    .pieza__price-tag { font-family:var(--font-serif); font-size:1.2rem; font-weight:400; color:var(--color-negro); margin-bottom:1rem; }
+    .pieza__footer { display:flex; align-items:center; justify-content:space-between; gap:0.8rem; border-top:1px solid var(--color-borde); padding-top:1.2rem; }
+    .pieza__add-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      background: var(--color-negro); color: var(--color-marfil);
+      border: none; padding: 0.75rem 1rem; cursor: none;
+      font-family: var(--font-sans); font-size: 0.65rem; font-weight: 300;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      transition: background var(--transition-medium), transform 0.2s;
+    }
+    .pieza__add-btn:hover { background: var(--color-verde); transform: translateY(-1px); }
+    .pieza__add-btn.added { background: var(--color-dorado); color: var(--color-negro); }
+    .pieza__cta { font-family:var(--font-sans); font-weight:300; font-size:.72rem; letter-spacing:.15em; color:var(--color-dorado); transition:letter-spacing var(--transition-medium); white-space:nowrap; }
+    .pieza__cta:hover { letter-spacing:.22em; }
+    .coleccion__footer { text-align:center; margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--color-borde); }
+    .coleccion__note { font-family:var(--font-sans); font-weight:200; font-size:0.75rem; letter-spacing:0.12em; color:var(--color-gris); }
+
+    /* ── ORIGEN ── */
+    .origen { background: var(--color-marfil); overflow: hidden; }
+    .origen__layout { display:grid; grid-template-columns:1fr 1fr; gap:clamp(40px,6vw,90px); align-items:center; max-width:var(--container); margin:0 auto; padding:0 clamp(20px,5vw,60px); }
+    .origen__images { position:relative; height:clamp(450px,60vw,620px); }
+    .origen__img { position:absolute; overflow:hidden; }
+    .origen__img--1 { width:72%; height:85%; top:0; left:0; border:1px solid var(--color-borde); }
+    .origen__img--2 { width:52%; height:60%; bottom:0; right:0; border:1px solid var(--color-borde); }
+    .origen__content { padding:2rem 0; }
+    .origen__text { font-size:.9rem; font-weight:300; color:rgba(10,10,10,.75); line-height:1.85; margin-bottom:1.2rem; }
+    .origen__list { margin-top:2.5rem; display:flex; flex-direction:column; gap:1rem; }
+    .origen__list li { display:flex; gap:1rem; font-size:.82rem; font-weight:300; color:var(--color-negro); padding-bottom:1rem; border-bottom:1px solid var(--color-borde); }
+    .origen__list-num { color:var(--color-dorado); flex-shrink:0; }
+
+    /* ── EXCLUSIVIDAD ── */
+    .exclusividad { background:var(--color-verde); position:relative; overflow:hidden; }
+    .exclusividad__bg { position:absolute; inset:0; background:radial-gradient(ellipse at 80% 50%,rgba(198,169,107,.06) 0%,transparent 65%); }
+    .exclusividad__inner { position:relative; z-index:1; text-align:center; }
+    .exclusividad__pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:clamp(40px,6vw,70px); border:1px solid rgba(198,169,107,.15); }
+    .pilar { padding:2.5rem 2rem; border-right:1px solid rgba(198,169,107,.15); text-align:left; transition:background var(--transition-medium); }
+    .pilar:last-child { border-right:none; }
+    .pilar:hover { background:rgba(198,169,107,.04); }
+    .pilar__num { display:block; font-family:var(--font-italic); font-style:italic; font-size:1rem; color:var(--color-dorado); opacity:.6; margin-bottom:1.2rem; }
+    .pilar__title { font-family:var(--font-serif); font-weight:400; font-size:1rem; color:var(--color-marfil); margin-bottom:.8rem; }
+    .pilar__text { font-size:.8rem; font-weight:200; color:rgba(245,242,237,.55); line-height:1.8; }
+
+    /* ── MÉTODOS DE PAGO (SECCIÓN) ── */
+    .pagos { background: #F9F7F3; border-top: 1px solid var(--color-borde); border-bottom: 1px solid var(--color-borde); }
+    .pagos__inner { max-width: var(--container); margin: 0 auto; padding: 4rem clamp(20px,5vw,60px); }
+    .pagos__header { text-align:center; margin-bottom:3rem; }
+    .pagos__header h2 { font-family:var(--font-serif); font-weight:400; font-size:1.6rem; margin-bottom:0.5rem; }
+    .pagos__header p { font-family:var(--font-sans); font-weight:200; font-size:0.8rem; letter-spacing:0.1em; color:var(--color-gris); }
+    .pagos__grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1px; background:var(--color-borde); border:1px solid var(--color-borde); }
+    .pago-card {
+      background: #F9F7F3; padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem;
+      transition: background var(--transition-medium);
+    }
+    .pago-card:hover { background: white; }
+    .pago-card__icon { width:48px; height:48px; display:flex; align-items:center; justify-content:center; }
+    .pago-card__name { font-family:var(--font-serif); font-size:0.95rem; font-weight:400; color:var(--color-negro); }
+    .pago-card__desc { font-family:var(--font-sans); font-size:0.72rem; font-weight:200; color:var(--color-gris); line-height:1.6; letter-spacing:0.05em; }
+    .pagos__security { display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-top:2.5rem; }
+    .pagos__security span { font-family:var(--font-sans); font-size:0.7rem; font-weight:200; letter-spacing:0.12em; color:var(--color-gris); text-transform:uppercase; }
+
+    /* ── TESTIMONIOS ── */
+    .testimonios { background:var(--color-marfil); }
+    .testimonios__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; border:1px solid var(--color-borde); margin-bottom:clamp(50px,7vw,80px); }
+    .testimonio { padding:2.5rem 2rem; border-right:1px solid var(--color-borde); position:relative; }
+    .testimonio:last-child { border-right:none; }
+    .testimonio::before { content:'\201C'; font-family:var(--font-serif); font-size:4rem; color:var(--color-dorado); opacity:.25; position:absolute; top:1rem; left:1.5rem; line-height:1; }
+    .testimonio__text { font-family:var(--font-italic); font-weight:300; font-style:italic; font-size:.95rem; line-height:1.8; color:var(--color-negro); margin-bottom:1.5rem; padding-top:1.5rem; }
+    .testimonio__author { display:flex; flex-direction:column; gap:.2rem; }
+    .testimonio__name { font-family:var(--font-sans); font-weight:300; font-size:.75rem; color:var(--color-negro); letter-spacing:.05em; }
+    .testimonio__loc { font-family:var(--font-sans); font-weight:200; font-size:.68rem; color:var(--color-gris); letter-spacing:.1em; }
+    .visto-en { text-align:center; padding:2.5rem 0; border-top:1px solid var(--color-borde); }
+    .visto-en__label { font-family:var(--font-sans); font-weight:200; font-size:.65rem; letter-spacing:.25em; text-transform:uppercase; color:var(--color-gris); margin-bottom:1.5rem; }
+    .visto-en__logos { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.5rem 0; }
+    .visto-en__logo { font-family:var(--font-serif); font-weight:400; font-size:.95rem; color:rgba(10,10,10,.4); letter-spacing:.04em; padding:0 .5rem; transition:color var(--transition-medium); }
+    .visto-en__logo:hover { color:var(--color-negro); }
+    .visto-en__sep { color:var(--color-dorado); opacity:.3; font-size:.9rem; }
+
+    /* ── CAPTURA ── */
+    .captura { background:var(--color-negro); position:relative; overflow:hidden; }
+    .captura__bg { position:absolute; inset:0; background:radial-gradient(ellipse at 20% 80%,rgba(28,43,38,.6) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(198,169,107,.05) 0%,transparent 50%); }
+    .captura__inner { position:relative; z-index:1; text-align:center; }
+    .captura__sub { font-size:.82rem; font-weight:200; color:rgba(245,242,237,.45); line-height:1.9; margin-bottom:3rem; }
+    .captura__form-wrap { max-width:480px; margin:0 auto; }
+    .captura__form { display:flex; flex-direction:column; gap:1.2rem; }
+    .input-group { display:flex; flex-direction:column; gap:.5rem; text-align:left; }
+    .input-label { font-family:var(--font-sans); font-weight:200; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,242,237,.5); }
+    .input-optional { opacity:.5; font-size:.6rem; }
+    .input-field { width:100%; background:rgba(245,242,237,.05); border:1px solid rgba(198,169,107,.2); color:var(--color-marfil); font-family:var(--font-sans); font-weight:300; font-size:.85rem; padding:1rem 1.2rem; outline:none; cursor:none; transition:border-color var(--transition-medium), background var(--transition-medium); }
+    .input-field::placeholder { color:rgba(245,242,237,.2); }
+    .input-field:focus { border-color:var(--color-dorado); background:rgba(245,242,237,.07); }
+    .captura__confirm { padding:3rem 2rem; border:1px solid rgba(198,169,107,.25); animation:confirmReveal .8s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes confirmReveal { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .captura__confirm-icon { font-size:1.5rem; color:var(--color-dorado); display:block; margin-bottom:1.5rem; animation:starPulse 2s ease-in-out infinite; }
+    @keyframes starPulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+    .captura__confirm-title { font-family:var(--font-serif); font-size:1.4rem; color:var(--color-marfil); margin-bottom:.8rem; }
+    .captura__confirm-sub { font-size:.82rem; font-weight:200; color:rgba(245,242,237,.5); line-height:1.85; }
+    .captura__disclaimer { margin-top:2.5rem; font-family:var(--font-sans); font-weight:200; font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,242,237,.2); }
+    .captura__disclaimer em { color:rgba(198,169,107,.4); font-style:normal; }
+
+    /* ── FOOTER ── */
+    .footer { background:var(--color-negro); padding:3rem 0 2.5rem; border-top:1px solid rgba(198,169,107,.1); }
+    .footer__inner { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; }
+    .footer__brand { display:flex; flex-direction:column; gap:.4rem; }
+    .footer__logo { font-family:var(--font-serif); font-size:1.5rem; font-weight:400; letter-spacing:.2em; color:var(--color-marfil); }
+    .footer__tagline { font-family:var(--font-sans); font-weight:200; font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-dorado); opacity:.6; }
+    .footer__info { text-align:right; font-family:var(--font-sans); font-weight:200; font-size:.7rem; line-height:1.8; color:rgba(245,242,237,.25); letter-spacing:.05em; }
+    .footer__line { height:1px; background:linear-gradient(90deg,transparent,rgba(198,169,107,.2),transparent); }
+
+    /* ── TOAST NOTIFICATION ── */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--color-negro); color: var(--color-marfil);
+      padding: 1rem 2rem; z-index: 800;
+      font-family: var(--font-sans); font-size: 0.75rem; font-weight: 300;
+      letter-spacing: 0.1em; border: 1px solid var(--color-borde);
+      display: flex; align-items: center; gap: 0.8rem;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
+      opacity: 0; pointer-events: none; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast-icon { color: var(--color-dorado); font-size: 0.9rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .historia__layout { grid-template-columns: 1fr; }
+      .historia__images { height: 65vw; min-height: 300px; }
+      .historia__content { padding: 3rem clamp(20px,5vw,60px); }
+      .historia__year { display: none; }
+    }
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero__content { padding: 7rem 1.5rem 4rem; grid-row: 2; }
+      .hero__image-wrap { height: 55vw; min-height: 260px; grid-row: 1; }
+      .hero__image { position: relative; height: 100%; }
+      .hero__scroll-indicator { display: none; }
+      .origen__layout { grid-template-columns: 1fr; }
+      .origen__images { height: 60vw; min-height: 280px; }
+      .coleccion__grid { grid-template-columns: 1fr; gap: 2px; }
+      .pieza--featured .pieza__image-wrap { aspect-ratio: 3/4; }
+      .testimonios__grid { grid-template-columns: 1fr; }
+      .testimonio { border-right: none; border-bottom: 1px solid var(--color-borde); }
+      .testimonio:last-child { border-bottom: none; }
+      .exclusividad__pillars { grid-template-columns: 1fr; }
+      .pilar { border-right: none; border-bottom: 1px solid rgba(198,169,107,.15); }
+      .pilar:last-child { border-bottom: none; }
+      .footer__inner { flex-direction: column; gap: 2rem; align-items: flex-start; }
+      .footer__info { text-align: left; }
+      .manifiesto__num { display: none; }
+      .nav__links { gap: 1rem; }
+    }
+    @media (max-width: 560px) {
+      .visto-en__logos { flex-direction: column; gap: .6rem; }
+      .visto-en__sep { display: none; }
+      .pagos__grid { grid-template-columns: repeat(2,1fr); }
+      .cart-drawer { width: 100vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- CARRITO OVERLAY + DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+    <div class="cart-header">
+      <div style="display:flex;align-items:baseline;gap:.5rem">
+        <h2 class="cart-title">Tu selección</h2>
+        <span class="cart-count" id="cartCountDrawer">0 piezas</span>
+      </div>
+      <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-icon">◻</div>
+        <p>Aún no has seleccionado ninguna pieza.</p>
+      </div>
+    </div>
+
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-subtotal">
+        <span class="cart-subtotal-label">Total estimado</span>
+        <span class="cart-subtotal-value" id="cartTotal">$0</span>
+      </div>
+
+      <!-- Métodos de pago en el carrito -->
+      <div class="cart-payment-methods">
+        <div class="pm-badge">
+          <svg width="28" height="18" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#1A1F71"/><rect x="14" y="7" width="10" height="10" rx="5" fill="#F79E1B"/><rect x="10" y="7" width="10" height="10" rx="5" fill="#EB001B"/></svg>
+          Visa
+        </div>
+        <div class="pm-badge">
+          <svg width="28" height="18" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#252525"/><circle cx="15" cy="12" r="6" fill="#EB001B"/><circle cx="23" cy="12" r="6" fill="#F79E1B" opacity=".9"/></svg>
+          Mastercard
+        </div>
+        <div class="pm-badge">
+          <svg width="28" height="18" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#003087"/><text x="19" y="16" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="9" fill="white">PayPal</text></svg>
+          PayPal
+        </div>
+        <div class="pm-badge">
+          <svg width="28" height="18" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#000"/><text x="19" y="16" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="8" fill="white">Pay</text></svg>
+          Apple Pay
+        </div>
+        <div class="pm-badge">
+          <svg width="28" height="18" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#4285F4"/><text x="8" y="16" font-family="Arial" font-weight="bold" font-size="8" fill="white">G</text><text x="15" y="16" font-family="Arial" font-size="7" fill="white">Pay</text></svg>
+          Google Pay
+        </div>
+        <div class="pm-badge">
+          <svg width="28" height="18" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#FF6900"/><text x="19" y="16" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="7" fill="white">PSE</text></svg>
+          PSE
+        </div>
+      </div>
+
+      <button class="btn btn--gold btn--full" onclick="checkoutDemo()">
+        Proceder al pago
+      </button>
+      <p class="cart-checkout-note">Pago 100% seguro · SSL encriptado · Devoluciones en 30 días</p>
+    </div>
+  </aside>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav__logo" aria-label="ALTARA inicio">
+      <span class="nav__logo-text">ALTARA</span>
+      <span class="nav__logo-sub">Colombia</span>
+    </a>
+    <div class="nav__links">
+      <a href="#coleccion" class="nav__link">Colección</a>
+      <a href="#historia" class="nav__link">Historia</a>
+      <button class="nav__cart-btn" id="cartBtn" aria-label="Abrir carrito">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Carrito
+        <span class="nav__cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- 01 · HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__bg"><div class="hero__texture"></div><div class="hero__grain"></div></div>
+      <div class="hero__content">
+        <div class="hero__edition reveal-up">
+          <span class="label">Temporada I</span><span class="label-divider">·</span><span class="label">Colección Fundacional</span>
+        </div>
+        <h1 class="hero__headline reveal-up" style="--delay:.15s">
+          Luxury,<br /><em>Recrafted</em><br />in Colombia.
+        </h1>
+        <p class="hero__sub reveal-up" style="--delay:.3s">
+          Piezas hechas en talleres colombianos.<br />Diseñadas para el mundo.
+        </p>
+        <div class="hero__cta-wrap reveal-up" style="--delay:.45s">
+          <a href="#coleccion" class="btn btn--primary">Ver colección</a>
+          <a href="#historia" class="btn btn--outline">Nuestra historia</a>
+        </div>
+      </div>
+      <div class="hero__scroll-indicator" aria-hidden="true">
+        <span class="hero__scroll-line"></span>
+        <span class="hero__scroll-label">scroll</span>
+      </div>
+      <div class="hero__image-wrap">
+        <!-- Imagen hero: taller de cuero, Bogotá -->
+        <div class="hero__image e-img" style="background-image:url('https://images.unsplash.com/photo-1558171813-0cfed21d6e44?w=900&q=80&auto=format&fit=crop')"></div>
+      </div>
+    </section>
+
+    <!-- 02 · MANIFIESTO -->
+    <section class="manifiesto section" id="manifiesto">
+      <div class="container container--narrow">
+        <div class="manifiesto__num reveal-left">02</div>
+        <blockquote class="manifiesto__quote reveal-up">
+          <p>"No fabricamos en masa.<br />Creamos en silencio,<br /><em>con manos que conocen el tiempo."</em></p>
+        </blockquote>
+        <div class="manifiesto__body reveal-up" style="--delay:.2s">
+          <p>Colombia no es solo origen. Es técnica acumulada por generaciones, es el olor del cuero curtido en Bogotá, es la precisión de artesanos que nunca aprendieron a tener prisa.</p>
+          <p>ALTARA no vende bolsos. Eleva objetos cotidianos a piezas de culto contemporáneo.</p>
+        </div>
+        <div class="manifiesto__mark reveal-up" style="--delay:.3s">
+          <span>— Hecho en Colombia para el mundo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · HISTORIA -->
+    <section class="historia section" id="historia">
+      <div class="historia__layout">
+        <div class="historia__images">
+          <div class="historia__img-main">
+            <!-- Imagen: artesano trabajando cuero -->
+            <div class="e-img" style="background-image:url('https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=800&q=80&auto=format&fit=crop')"></div>
+          </div>
+          <div class="historia__img-overlay">
+            <!-- Imagen: detalle de cuero / costura -->
+            <div class="e-img" style="background-image:url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80&auto=format&fit=crop')"></div>
+          </div>
+        </div>
+
+        <div class="historia__content">
+          <span class="historia__year reveal-up" style="--delay:.05s">2019</span>
+          <span class="section-label reveal-up">Nuestra historia</span>
+          <h2 class="section-title reveal-up" style="--delay:.1s">
+            Nació en un taller.<br /><em>Creció en el mundo.</em>
+          </h2>
+          <p class="historia__text reveal-up" style="--delay:.15s">
+            ALTARA nació en 2019 en un pequeño taller del barrio La Candelaria, Bogotá. Su fundadora, Valentina Ríos, llevaba una década aprendiendo el oficio de los maestros curtidores del centro de la ciudad — hombres y mujeres que heredaron la técnica de sus padres, que a su vez la heredaron de los suyos.
+          </p>
+          <p class="historia__text reveal-up" style="--delay:.2s">
+            La pregunta que impulsó todo fue simple: ¿Por qué los bolsos más finos del mundo se hacen en Italia y Francia, si en Colombia existen las manos, el cuero y la sabiduría para hacerlos mejor?
+          </p>
+
+          <div class="historia__milestones reveal-up" style="--delay:.25s">
+            <div class="milestone">
+              <span class="milestone__year">2019</span>
+              <div class="milestone__text">
+                <strong>El primer taller</strong>
+                Valentina Ríos funda ALTARA en La Candelaria con tres artesanos y una visión.
+              </div>
+            </div>
+            <div class="milestone">
+              <span class="milestone__year">2021</span>
+              <div class="milestone__text">
+                <strong>Primer reconocimiento internacional</strong>
+                ALTARA es seleccionada en el Milan Crafts Showcase. Las primeras 12 piezas se venden en 48 horas.
+              </div>
+            </div>
+            <div class="milestone">
+              <span class="milestone__year">2023</span>
+              <div class="milestone__text">
+                <strong>Cuatro talleres, una sola filosofía</strong>
+                Se suman talleres en Medellín. Cada uno conserva autonomía total en su proceso.
+              </div>
+            </div>
+            <div class="milestone">
+              <span class="milestone__year">2025</span>
+              <div class="milestone__text">
+                <strong>Colección Fundacional — Temporada I</strong>
+                95 piezas. Edición numerada. Disponibles solo por lista de acceso.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · COLECCIÓN -->
+    <section class="coleccion section" id="coleccion">
+      <div class="container">
+        <header class="section-header reveal-up">
+          <span class="section-label">Colección</span>
+          <h2 class="section-title">Piezas Fundacionales</h2>
+          <p class="section-sub">Producción limitada. Sin reposición.</p>
+        </header>
+        <div class="coleccion__grid">
+
+          <!-- Pieza 01 -->
+          <article class="pieza reveal-up" style="--delay:0s">
+            <div class="pieza__image-wrap">
+              <!-- Bolso de cuero marrón claro / natural -->
+              <div class="e-img" style="background-image:url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80&auto=format&fit=crop')"></div>
+              <div class="pieza__overlay">
+                <a href="#captura" class="btn btn--ghost" style="font-size:.65rem;padding:.7rem 1.5rem">Ver detalles</a>
+              </div>
+              <span class="pieza__edition-tag">Ed. 01 / 40</span>
+            </div>
+            <div class="pieza__info">
+              <span class="pieza__num">001</span>
+              <h3 class="pieza__name">La Silenciosa</h3>
+              <p class="pieza__story">Cuero curtido vegetal de Bogotá. Costuras manuales. Forro en seda colombiana. Una pieza que no necesita presentarse.</p>
+              <p class="pieza__price-tag">$1.850.000 COP</p>
+              <div class="pieza__footer">
+                <button class="pieza__add-btn" data-id="001" data-name="La Silenciosa" data-price="1850000" data-img="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200&q=60">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                  Añadir
+                </button>
+                <a href="#captura" class="pieza__cta">Reservar →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pieza 02 -->
+          <article class="pieza pieza--featured reveal-up" style="--delay:.15s">
+            <div class="pieza__image-wrap">
+              <!-- Bolso oscuro, negro/café oscuro -->
+              <div class="e-img" style="background-image:url('https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80&auto=format&fit=crop')"></div>
+              <div class="pieza__overlay">
+                <a href="#captura" class="btn btn--ghost" style="font-size:.65rem;padding:.7rem 1.5rem">Ver detalles</a>
+              </div>
+              <span class="pieza__edition-tag">Ed. 01 / 25</span>
+            </div>
+            <div class="pieza__info">
+              <span class="pieza__num">002</span>
+              <h3 class="pieza__name">Carta Nocturna</h3>
+              <p class="pieza__story">Inspirada en los carteros del Chocó. Cuero negro mate envejecido a mano, herrajes en bronce oxidado. La edición más exclusiva de la temporada.</p>
+              <p class="pieza__price-tag">$2.400.000 COP</p>
+              <div class="pieza__footer">
+                <button class="pieza__add-btn" data-id="002" data-name="Carta Nocturna" data-price="2400000" data-img="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=200&q=60">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                  Añadir
+                </button>
+                <a href="#captura" class="pieza__cta">Reservar →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pieza 03 -->
+          <article class="pieza reveal-up" style="--delay:.3s">
+            <div class="pieza__image-wrap">
+              <!-- Bolso cuero crudo / natural beige -->
+              <div class="e-img" style="background-image:url('https://images.unsplash.com/photo-1575032617751-6ddec2089882?w=600&q=80&auto=format&fit=crop')"></div>
+              <div class="pieza__overlay">
+                <a href="#captura" class="btn btn--ghost" style="font-size:.65rem;padding:.7rem 1.5rem">Ver detalles</a>
+              </div>
+              <span class="pieza__edition-tag">Ed. 01 / 30</span>
+            </div>
+            <div class="pieza__info">
+              <span class="pieza__num">003</span>
+              <h3 class="pieza__name">Alba Cruda</h3>
+              <p class="pieza__story">Cuero natural sin teñir, con la textura que el animal dejó. Cada pieza es única. No hay dos iguales. No habrá segunda edición.</p>
+              <p class="pieza__price-tag">$1.650.000 COP</p>
+              <div class="pieza__footer">
+                <button class="pieza__add-btn" data-id="003" data-name="Alba Cruda" data-price="1650000" data-img="https://images.unsplash.com/photo-1575032617751-6ddec2089882?w=200&q=60">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                  Añadir
+                </button>
+                <a href="#captura" class="pieza__cta">Reservar →</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+        <div class="coleccion__footer reveal-up">
+          <p class="coleccion__note">Todas las piezas incluyen certificado de autenticidad firmado por el artesano y caja de presentación en madera colombiana.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · ORIGEN -->
+    <section class="origen section" id="origen">
+      <div class="origen__layout">
+        <div class="origen__images">
+          <div class="origen__img origen__img--1 reveal-left">
+            <!-- Manos trabajando cuero -->
+            <div class="e-img" style="background-image:url('https://images.unsplash.com/photo-1612902167054-f7cc63b60dab?w=500&q=80&auto=format&fit=crop')"></div>
+          </div>
+          <div class="origen__img origen__img--2 reveal-up" style="--delay:.2s">
+            <!-- Detalle costura / herramientas -->
+            <div class="e-img" style="background-image:url('https://images.unsplash.com/photo-1473188588951-666fce8e7c68?w=400&q=80&auto=format&fit=crop')"></div>
+          </div>
+        </div>
+        <div class="origen__content reveal-right">
+          <span class="section-label">Origen</span>
+          <h2 class="section-title">Colombia,<br /><em>taller del mundo.</em></h2>
+          <p class="origen__text">Cada pieza pasa por manos expertas en Colombia, donde la técnica se transmite, no se industrializa.</p>
+          <p class="origen__text">Trabajamos con cuatro talleres familiares en Bogotá y Medellín. Ninguno fabrica más de 80 piezas al año. Esa es la condición.</p>
+          <ul class="origen__list">
+            <li><span class="origen__list-num">—</span><span>Cuero colombiano certificado, curtido al vegetal</span></li>
+            <li><span class="origen__list-num">—</span><span>Mínimo 18 horas de trabajo manual por pieza</span></li>
+            <li><span class="origen__list-num">—</span><span>Sin subcontratación. Sin procesos industriales.</span></li>
+            <li><span class="origen__list-num">—</span><span>Garantía vitalicia de reparación artesanal</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · EXCLUSIVIDAD -->
+    <section class="exclusividad section" id="exclusividad">
+      <div class="exclusividad__bg"></div>
+      <div class="container container--narrow">
+        <div class="exclusividad__inner">
+          <span class="section-label section-label--light reveal-up">Acceso</span>
+          <h2 class="section-title section-title--light reveal-up" style="--delay:.1s">
+            No para todos.<br /><em>Para los que entienden.</em>
+          </h2>
+          <div class="exclusividad__pillars">
+            <div class="pilar reveal-up" style="--delay:0s">
+              <span class="pilar__num">I</span>
+              <h3 class="pilar__title">Ediciones Numeradas</h3>
+              <p class="pilar__text">Cada pieza lleva grabado su número de edición y el año de creación. El artesano la firma.</p>
+            </div>
+            <div class="pilar reveal-up" style="--delay:.15s">
+              <span class="pilar__num">II</span>
+              <h3 class="pilar__title">Sin Descuentos. Jamás.</h3>
+              <p class="pilar__text">El precio es el precio. No hay temporadas, no hay liquidaciones. Hay piezas o no las hay.</p>
+            </div>
+            <div class="pilar reveal-up" style="--delay:.3s">
+              <span class="pilar__num">III</span>
+              <h3 class="pilar__title">Acceso por Lista</h3>
+              <p class="pilar__text">Cuando una nueva edición se produce, los primeros en saberlo son quienes están en nuestra lista.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · MÉTODOS DE PAGO -->
+    <section class="pagos" id="pagos">
+      <div class="pagos__inner">
+        <div class="pagos__header reveal-up">
+          <span class="section-label" style="text-align:center">Pago seguro</span>
+          <h2>Compra con total confianza.</h2>
+          <p>Aceptamos los principales métodos de pago locales e internacionales.</p>
+        </div>
+        <div class="pagos__grid reveal-up" style="--delay:.1s">
+
+          <div class="pago-card">
+            <div class="pago-card__icon">
+              <svg width="48" height="32" viewBox="0 0 60 38" fill="none"><rect width="60" height="38" rx="6" fill="#1A1F71"/><rect x="22" y="10" width="16" height="18" rx="8" fill="#F79E1B"/><rect x="12" y="10" width="16" height="18" rx="8" fill="#EB001B"/></svg>
+            </div>
+            <p class="pago-card__name">Visa / Mastercard</p>
+            <p class="pago-card__desc">Tarjetas de crédito y débito internacionales. Cuotas disponibles.</p>
+          </div>
+
+          <div class="pago-card">
+            <div class="pago-card__icon">
+              <svg width="48" height="32" viewBox="0 0 60 38" fill="none"><rect width="60" height="38" rx="6" fill="#003087"/><text x="30" y="24" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13" fill="white">PayPal</text></svg>
+            </div>
+            <p class="pago-card__name">PayPal</p>
+            <p class="pago-card__desc">Pagos internacionales rápidos y protegidos con tu cuenta PayPal.</p>
+          </div>
+
+          <div class="pago-card">
+            <div class="pago-card__icon">
+              <svg width="48" height="32" viewBox="0 0 60 38" fill="none"><rect width="60" height="38" rx="6" fill="#000"/><text x="30" y="25" text-anchor="middle" font-family="-apple-system,Arial" font-size="14" fill="white"> Pay</text></svg>
+            </div>
+            <p class="pago-card__name">Apple Pay</p>
+            <p class="pago-card__desc">Un toque desde tu iPhone o Mac. Sin ingresar datos manualmente.</p>
+          </div>
+
+          <div class="pago-card">
+            <div class="pago-card__icon">
+              <svg width="48" height="32" viewBox="0 0 60 38" fill="none"><rect width="60" height="38" rx="6" fill="#4285F4"/><text x="12" y="26" font-family="Arial" font-weight="bold" font-size="16" fill="white">G</text><text x="26" y="26" font-family="Arial" font-size="12" fill="white">Pay</text></svg>
+            </div>
+            <p class="pago-card__name">Google Pay</p>
+            <p class="pago-card__desc">Pago instantáneo desde Android o Chrome. Seguro y sin fricciones.</p>
+          </div>
+
+          <div class="pago-card">
+            <div class="pago-card__icon">
+              <svg width="48" height="32" viewBox="0 0 60 38" fill="none"><rect width="60" height="38" rx="6" fill="#FF6900"/><text x="30" y="25" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13" fill="white">PSE</text></svg>
+            </div>
+            <p class="pago-card__name">PSE / Nequi</p>
+            <p class="pago-card__desc">Transferencias bancarias y billeteras digitales colombianas.</p>
+          </div>
+
+          <div class="pago-card">
+            <div class="pago-card__icon">
+              <svg width="48" height="32" viewBox="0 0 60 38" fill="none"><rect width="60" height="38" rx="6" fill="#1A1F71"/><text x="30" y="25" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white">AMEX</text></svg>
+            </div>
+            <p class="pago-card__name">American Express</p>
+            <p class="pago-card__desc">Tarjetas Amex bienvenidas. Puntos y beneficios aplicables.</p>
+          </div>
+
+        </div>
+        <div class="pagos__security reveal-up">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          <span>Conexión SSL 256-bit encriptada · Datos nunca almacenados · PCI DSS Compliant</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · TESTIMONIOS -->
+    <section class="testimonios section" id="testimonios">
+      <div class="container">
+        <header class="section-header reveal-up">
+          <span class="section-label">Voz del mundo</span>
+          <h2 class="section-title">Lo que dicen.</h2>
+        </header>
+        <div class="testimonios__grid">
+          <blockquote class="testimonio reveal-up" style="--delay:0s">
+            <p class="testimonio__text">"Feels like European luxury, but more soulful. There's a story in every stitch."</p>
+            <footer class="testimonio__author">
+              <span class="testimonio__name">— C. Delacroix</span>
+              <span class="testimonio__loc">París, Francia</span>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonio reveal-up" style="--delay:.15s">
+            <p class="testimonio__text">"I've carried bags from Bottega and Loewe. ALTARA belongs in that same breath. Maybe ahead of it."</p>
+            <footer class="testimonio__author">
+              <span class="testimonio__name">— M. Okonkwo</span>
+              <span class="testimonio__loc">Lagos / Londres</span>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonio reveal-up" style="--delay:.3s">
+            <p class="testimonio__text">"Lo que me sorprendió no fue el diseño. Fue darme cuenta de que no quería soltar el bolso."</p>
+            <footer class="testimonio__author">
+              <span class="testimonio__name">— S. Camacho</span>
+              <span class="testimonio__loc">Ciudad de México</span>
+            </footer>
+          </blockquote>
+        </div>
+        <div class="visto-en reveal-up">
+          <p class="visto-en__label">Visto en</p>
+          <div class="visto-en__logos">
+            <span class="visto-en__logo">Vogue Latinoamérica</span>
+            <span class="visto-en__sep">·</span>
+            <span class="visto-en__logo">Elle Colombia</span>
+            <span class="visto-en__sep">·</span>
+            <span class="visto-en__logo">WSJ Magazine</span>
+            <span class="visto-en__sep">·</span>
+            <span class="visto-en__logo">Monocle</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 · CAPTURA -->
+    <section class="captura section" id="captura">
+      <div class="captura__bg"></div>
+      <div class="container container--narrow">
+        <div class="captura__inner">
+          <span class="section-label section-label--light reveal-up">Lista de Espera</span>
+          <h2 class="section-title section-title--light reveal-up" style="--delay:.1s">
+            Únete al<br /><em>acceso privado.</em>
+          </h2>
+          <p class="captura__sub reveal-up" style="--delay:.2s">
+            No enviamos newsletters. No vendemos datos.<br />Solo te avisamos cuando hay algo digno de tu atención.
+          </p>
+          <div class="captura__form-wrap reveal-up" style="--delay:.3s">
+            <div class="captura__form" id="capturaForm">
+              <div class="input-group">
+                <label for="email" class="input-label">Correo electrónico</label>
+                <input type="email" id="email" name="email" class="input-field" placeholder="tu@correo.com" required />
+              </div>
+              <div class="input-group">
+                <label for="whatsapp" class="input-label">WhatsApp <span class="input-optional">(opcional)</span></label>
+                <input type="tel" id="whatsapp" name="whatsapp" class="input-field" placeholder="+57 300 000 0000" />
+              </div>
+              <button type="button" class="btn btn--primary btn--full" id="submitBtn">
+                Solicitar acceso privado
+              </button>
+            </div>
+            <div class="captura__confirm" id="capturaConfirm" hidden>
+              <div class="captura__confirm-icon">✦</div>
+              <p class="captura__confirm-title">Bienvenido a ALTARA.</p>
+              <p class="captura__confirm-sub">Tu solicitud fue recibida. Cuando la próxima edición esté lista, serás el primero en saberlo.</p>
+            </div>
+          </div>
+          <p class="captura__disclaimer reveal-up" style="--delay:.4s">
+            Producción Temporada I — <em>Disponibilidad limitada a 95 piezas</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__logo">ALTARA</span>
+          <span class="footer__tagline">Luxury, Recrafted in Colombia.</span>
+        </div>
+        <div class="footer__info">
+          <p>© <span id="year"></span> ALTARA. Todos los derechos reservados.</p>
+          <p>Bogotá, Colombia — Para el mundo.</p>
+        </div>
+      </div>
+      <div class="footer__line"></div>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✦</span>
+    <span id="toastMsg">Pieza añadida al carrito</span>
+  </div>
+
+  <script>
+  'use strict';
+
+  /* ── CURSOR ── */
+  (function(){
+    const c = document.getElementById('cursor');
+    const f = document.getElementById('cursorFollower');
+    if (!c || !f || window.matchMedia('(hover:none)').matches) return;
+    let mx=0,my=0,fx=0,fy=0;
+    document.addEventListener('mousemove',e=>{
+      mx=e.clientX; my=e.clientY;
+      c.style.left=mx+'px'; c.style.top=my+'px';
+    });
+    (function loop(){ fx+=(mx-fx)*.12; fy+=(my-fy)*.12; f.style.left=fx+'px'; f.style.top=fy+'px'; requestAnimationFrame(loop); })();
+    document.querySelectorAll('a,button,input').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ c.style.transform='translate(-50%,-50%) scale(1.5)'; c.style.background='transparent'; c.style.border='1px solid var(--color-dorado)'; f.style.width='56px'; f.style.height='56px'; f.style.borderColor='var(--color-dorado)'; });
+      el.addEventListener('mouseleave',()=>{ c.style.transform='translate(-50%,-50%) scale(1)'; c.style.background='var(--color-dorado)'; c.style.border='none'; f.style.width='36px'; f.style.height='36px'; f.style.borderColor='rgba(198,169,107,0.5)'; });
+    });
+    document.addEventListener('mouseleave',()=>{c.style.opacity='0';f.style.opacity='0';});
+    document.addEventListener('mouseenter',()=>{c.style.opacity='1';f.style.opacity='1';});
+  })();
+
+  /* ── NAV ── */
+  window.addEventListener('scroll',()=>{
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  },{passive:true});
+
+  /* ── REVEAL ── */
+  (function(){
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); obs.unobserve(e.target); }});
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal-up,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
+  })();
+
+  /* Hero entrada */
+  setTimeout(()=>{
+    document.querySelectorAll('.hero .reveal-up').forEach((el,i)=>setTimeout(()=>el.classList.add('revealed'),i*150));
+  },200);
+
+  /* Parallax hero */
+  (function(){
+    const img = document.querySelector('.hero__image');
+    if (!img || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    let t=false;
+    window.addEventListener('scroll',()=>{
+      if(!t){requestAnimationFrame(()=>{ if(window.scrollY<window.innerHeight) img.style.transform=`translateY(${window.scrollY*.18}px)`; t=false; });t=true;}
+    },{passive:true});
+  })();
+
+  /* ── CARRITO ── */
+  const cart = { items: [] };
+
+  function formatCOP(n){ return '$' + n.toLocaleString('es-CO') + ' COP'; }
+
+  function updateCartUI(){
+    const total = cart.items.reduce((s,i)=>s+i.price,0);
+    const count = cart.items.length;
+    const badge = document.getElementById('cartBadge');
+    const countDrawer = document.getElementById('cartCountDrawer');
+    const totalEl = document.getElementById('cartTotal');
+    const footer = document.getElementById('cartFooter');
+    const empty = document.getElementById('cartEmpty');
+    const itemsEl = document.getElementById('cartItems');
+
+    badge.textContent = count;
+    badge.classList.toggle('visible', count > 0);
+    countDrawer.textContent = count + (count===1?' pieza':' piezas');
+    totalEl.textContent = formatCOP(total);
+    footer.style.display = count > 0 ? 'block' : 'none';
+    empty.style.display = count === 0 ? 'block' : 'none';
+
+    // Renderizar ítems
+    const existing = itemsEl.querySelectorAll('.cart-item');
+    existing.forEach(el=>el.remove());
+
+    cart.items.forEach(item=>{
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="cart-item-img"><div class="e-img" style="background-image:url('${item.img}')"></div></div>
+        <div class="cart-item-info">
+          <p class="cart-item-name">${item.name}</p>
+          <p class="cart-item-ed">Edición numerada</p>
+          <p class="cart-item-price">${formatCOP(item.price)}</p>
+        </div>
+        <button class="cart-item-remove" data-id="${item.id}" aria-label="Eliminar">✕</button>`;
+      itemsEl.appendChild(div);
+    });
+
+    // Botones eliminar
+    itemsEl.querySelectorAll('.cart-item-remove').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        cart.items = cart.items.filter(i=>i.id!==btn.dataset.id);
+        // Resetear botón de pieza
+        const addBtn = document.querySelector(`.pieza__add-btn[data-id="${btn.dataset.id}"]`);
+        if(addBtn){ addBtn.classList.remove('added'); addBtn.innerHTML = cartIconSVG + ' Añadir'; }
+        updateCartUI();
+      });
+    });
+  }
+
+  const cartIconSVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`;
+
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),3000);
+  }
+
+  // Abrir/cerrar carrito
+  function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.body.style.overflow=''; }
+
+  document.getElementById('cartBtn').addEventListener('click', openCart);
+  document.getElementById('cartClose').addEventListener('click', closeCart);
+  document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+  // Añadir al carrito
+  document.querySelectorAll('.pieza__add-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id = btn.dataset.id;
+      if(cart.items.find(i=>i.id===id)){
+        showToast('Esta pieza ya está en tu selección.');
+        openCart();
+        return;
+      }
+      cart.items.push({ id, name: btn.dataset.name, price: parseInt(btn.dataset.price), img: btn.dataset.img });
+      btn.classList.add('added');
+      btn.innerHTML = '✓ Añadido';
+      updateCartUI();
+      showToast(btn.dataset.name + ' añadida a tu selección.');
+    });
+  });
+
+  window.checkoutDemo = function(){
+    alert('En producción, aquí se integraría el flujo de pago con Stripe, Wompi o MercadoPago. ¡ALTARA está lista para el mundo!');
+  };
+
+  /* ── FORMULARIO ── */
+  (function(){
+    const btn = document.getElementById('submitBtn');
+    const form = document.getElementById('capturaForm');
+    const conf = document.getElementById('capturaConfirm');
+    const emailEl = document.getElementById('email');
+    if(!btn||!form||!conf||!emailEl) return;
+    function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+    function shake(el){
+      const moves=['-6px','6px','-4px','4px','0']; let i=0;
+      el.style.borderColor='rgba(180,60,60,0.6)';
+      (function s(){ if(i<moves.length){ el.style.transform=`translateX(${moves[i++]})`; setTimeout(s,70); } else { el.style.transform=''; el.style.borderColor=''; }})();
+    }
+    btn.addEventListener('click',()=>{
+      if(!isEmail(emailEl.value)){ shake(emailEl); emailEl.focus(); return; }
+      btn.textContent='Procesando...'; btn.disabled=true; btn.style.opacity='0.6';
+      setTimeout(()=>{
+        form.style.cssText='opacity:0;transform:translateY(-10px);transition:opacity .4s,transform .4s';
+        setTimeout(()=>{
+          form.hidden=true; conf.hidden=false;
+          const icon=conf.querySelector('.captura__confirm-icon');
+          if(icon){ icon.style.transform='scale(0)'; icon.style.transition='transform .6s cubic-bezier(.34,1.56,.64,1)'; setTimeout(()=>icon.style.transform='scale(1)',50); }
+        },400);
+      },1200);
+    });
+    emailEl.addEventListener('keydown',e=>{ if(e.key==='Enter') btn.click(); });
+    emailEl.addEventListener('blur',()=>{ emailEl.style.borderColor=(emailEl.value&&!isEmail(emailEl.value))?'rgba(180,60,60,0.4)':''; });
+  })();
+
+  /* Año footer */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',function(e){
+      const t=document.querySelector(this.getAttribute('href'));
+      if(!t) return; e.preventDefault();
+      const navH=document.getElementById('nav')?.offsetHeight||0;
+      window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-navH,behavior:'smooth'});
+    });
+  });
+
+  /* Reduced motion */
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    document.querySelectorAll('.reveal-up,.reveal-left,.reveal-right').forEach(el=>el.classList.add('revealed'));
+  }
+  </script>
+</body>
+</html>
